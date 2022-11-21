@@ -1,4 +1,5 @@
 //LVDC Memory Module
+//Module to simulate each of eight different memory modules within the LVDC
 
 #define memoryLocations 256
 
