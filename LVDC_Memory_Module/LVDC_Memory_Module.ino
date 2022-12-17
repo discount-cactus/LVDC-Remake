@@ -1,6 +1,11 @@
 //LVDC Memory Module
 //Module to simulate each of eight different memory modules within the LVDC
 
+//To-Do's:
+//Module address
+//Sector address
+//Octal to decimal function
+
 #define memoryLocations 256
 
 const int dataPin[28] = {};
