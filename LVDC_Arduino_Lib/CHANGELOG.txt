@@ -1,4 +1,0 @@
-Change Log:
-
-A document to keep a log of updates to the library
-12/16/2022 - Created the library
