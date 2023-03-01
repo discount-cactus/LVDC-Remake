@@ -1,7 +1,9 @@
 # LVDC-Remake
-Reverse Engineering the LVDC flight computer to the Saturn V rocket from the 1960's.
+Goal: Build an equivalent of the flight computer to the Saturn V rocket from the 1960's.
 
 From: October 9th, 2022 - Present
+
+<em>DISCLAIMER: This repo does NOT include schematics, board layouts or fabrication files for any of the boards that make up the project. The purpose of this repo is to share a breif insight to the progress of the project. Some small pieces of the project are provided, but are merely for educational purposes.</em>
 
 ### Input Interface
 
