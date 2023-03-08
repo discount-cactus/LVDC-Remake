@@ -1,6 +1,5 @@
 //Timing Element R2
 //A single-component substitution to the Timing Element R1 board
-
 #include "LVDC.h"
 
 int bit_time = 1; // 1-14

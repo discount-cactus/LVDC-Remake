@@ -1,6 +1,5 @@
 //LVDC Memory Module
 //Module to simulate a single memory module within the LVDC
-
 #include <LVDC.h>
 
 #define FRAM_A1 4

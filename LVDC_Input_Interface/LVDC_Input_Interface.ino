@@ -28,7 +28,8 @@ void loop(){
   digitalWrite(clockPin,LOW);
   delay(500);
 
-  //Gets data from desktop GUI, if connected to laptop
+  //Gets data from desktop GUI when connected to laptop
+  //THIS WILL BE ADDDED LATER, WILL NEED A PYTHON GUI
   //dataFromGUI = Serial.read(); instruction = dataFromGUI;
 }
 
