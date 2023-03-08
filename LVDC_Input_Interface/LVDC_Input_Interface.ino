@@ -27,6 +27,9 @@ void loop(){
   delay(500);
   digitalWrite(clockPin,LOW);
   delay(500);
+
+  //Gets data from desktop GUI, if connected to laptop
+  //dataFromGUI = Serial.read(); instruction = dataFromGUI;
 }
 
 
