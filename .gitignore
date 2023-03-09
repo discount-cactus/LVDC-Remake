@@ -1,3 +1,5 @@
+# For reference: https://git-scm.com/docs/gitignore
+
 #Specific files defined by me
 .DS_Store
 
