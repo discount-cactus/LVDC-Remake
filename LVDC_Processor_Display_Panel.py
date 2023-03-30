@@ -23,6 +23,7 @@ import time
 
 H = 1500
 W = 600
+font1 = 15
 
 i = 0
 
@@ -39,20 +40,24 @@ def place_lights():
         widget.destroy()
 
     create_light(15,10,W,40,"Processor Display Panel",30,'#696969');
+    create_light(W*0.44,50,100,40,"DATA",font1,'#696969');
+    create_light(W*0.76,170,100,40,"OP CODE",font1,'#696969');
+    create_light(W*0.29,270,200,40,"MEMORY ADDRESS",font1,'#696969');
+    create_light(W*0.05,370,200,40,"SYLLABLE",font1,'#696969');
     
-    create_light(W*0.07,100,40,40,"1",16,'#4d0400');
-    create_light(W*0.14,100,40,40,"2",16,'#4d0400');
-    create_light(W*0.21,100,40,40,"3",16,'#4d0400');
-    create_light(W*0.28,100,40,40,"4",16,'#4d0400');
-    create_light(W*0.35,100,40,40,"5",16,'#4d0400');
-    create_light(W*0.42,100,40,40,"6",16,'#4d0400');
-    create_light(W*0.49,100,40,40,"7",16,'#4d0400');
-    create_light(W*0.56,100,40,40,"8",16,'#4d0400');
-    create_light(W*0.63,100,40,40,"9",16,'#4d0400');
-    create_light(W*0.70,100,40,40,"10",16,'#4d0400');
-    create_light(W*0.77,100,40,40,"11",16,'#4d0400');
-    create_light(W*0.84,100,40,40,"12",16,'#4d0400');
-    create_light(W*0.91,100,40,40,"13",16,'#4d0400');
+    create_light(W*0.07,100,40,40,"1",font1,'#4d0400');
+    create_light(W*0.14,100,40,40,"2",font1,'#4d0400');
+    create_light(W*0.21,100,40,40,"3",font1,'#4d0400');
+    create_light(W*0.28,100,40,40,"4",font1,'#4d0400');
+    create_light(W*0.35,100,40,40,"5",font1,'#4d0400');
+    create_light(W*0.42,100,40,40,"6",font1,'#4d0400');
+    create_light(W*0.49,100,40,40,"7",font1,'#4d0400');
+    create_light(W*0.56,100,40,40,"8",font1,'#4d0400');
+    create_light(W*0.63,100,40,40,"9",font1,'#4d0400');
+    create_light(W*0.70,100,40,40,"10",font1,'#4d0400');
+    create_light(W*0.77,100,40,40,"11",font1,'#4d0400');
+    create_light(W*0.84,100,40,40,"12",font1,'#4d0400');
+    create_light(W*0.91,100,40,40,"13",font1,'#4d0400');
 
     create_light(W*0.12,200,40,40,"ERROR RESET",10,'#4d0400');
     create_light(W*0.22,200,40,40,"ERROR PARITY",10,'#4d0400');
@@ -104,6 +109,7 @@ canvas.pack()
 frame = tk.Frame(app,bg='#696969')
 frame.place(relwidth=1,relheight=1)
 place_lights()
+#canvas.create_line(0,1200,600,1200, fill="green", width=20)
 
 app.mainloop()
 
