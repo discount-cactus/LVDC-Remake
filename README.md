@@ -19,7 +19,7 @@ The original LVDC ran the master clock at a speed of 2.048MHz to drive timing an
 
 ### Memory Element
 
-![IMG_6613](https://user-images.githubusercontent.com/113632274/230699092-6b2f3193-49d3-4fe1-83e1-95e251afd8f5.JPG)
+![IMG_6613](https://user-images.githubusercontent.com/113632274/230699162-63b6d666-30f4-4b52-b037-1b50e7f714fa.JPG)
 
 The Memory Element is composed of the memory and circuitry that manages the memory structure itself and stores all data for the LVDC. The original memory element stored information in a 128x64x14 array of ferrite cores that were magnetized in a certain direction to store a 1 or 0. For this project, and due to the complexity of constructing such an array of tiny ferrite cores, an Arduino Mega Pro was used to emulate this array - which further led to several modifications to circuitry directly interacting with the would-be ferrite core array.
 
