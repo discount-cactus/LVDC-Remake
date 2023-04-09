@@ -1,6 +1,5 @@
 # Notes
-
-## Collection of notes to save digitally
+Collection of notes to save digitally on the repo.
 
 ## Boards
 #### Input Interface
