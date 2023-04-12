@@ -11,13 +11,6 @@
 #define ED_detect_Y 16
 #define ED_detect_X 17
 
-/* Notes
-- Memory is organized into 8 memory modules, 16 sectors
-  - Total 64 x 64 per syllable (per module)
-
-
-*/
-
 const int dataPin[14] = {A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13};
 const int sectorSelect[4] = {36,37,38,39};
 
@@ -46,6 +39,7 @@ void setup() {
   while(!Serial){}
   
   initialize_memory();                        //Initializes the memory
+  //initialize_memory_with_random_data();
   
   for(int i=0; i < 14; i++){                  //Sets the address pins as inputs
     pinMode(dataPin[i],INPUT);
@@ -93,7 +87,25 @@ void loop() {
 void initialize_memory(){
   for(int i=0; i < 64; i++){
     for(int ii=0; i < 64; ii++){
-      memory[i][ii] = 0b00000000000000; //MM.location_empty;
+      memory[i][ii] = MM.location_empty; //0b00000000000000
+    }
+  }
+}
+
+void initialize_memory_with_random_data(){
+  int num;
+  for(int i=0; i < 64; i++){
+    for(int ii=0; i < 64; ii++){
+      byte tempData = 0b00000000000000;
+      for(int i=0; i < 14; i++){
+        num = random(0,10);
+        if(num > 5){
+          bitWrite(tempData,i,1);
+        }else{
+          bitWrite(tempData,i,0);
+        }
+      }
+      memory[i][ii] = tempData;
     }
   }
 }
