@@ -6,10 +6,17 @@
 #define FRAM_A2 5
 #define SyllableSelect 6
 #define MemoryModuleSelect 7
-#define store_read 14
+#define write_read 14
 #define dataSig 15
 #define ED_detect_Y 16
 #define ED_detect_X 17
+
+/* Notes
+- Memory is organized into 8 memory modules, 16 sectors
+  - Total 64 x 64 per syllable (per module)
+
+
+*/
 
 const int dataPin[14] = {A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13};
 const int sectorSelect[4] = {36,37,38,39};
@@ -24,10 +31,13 @@ const int Hi_Y_answer[3] = {0,1,0};
 const int Lo_X_answer[3] = {0,1,0};
 const int Hi_X_answer[4] = {0,0,1,0};
 
-byte memory[16];
+byte memory[64][64];
 int syllable;
-int sector = 0;
-int location = 1;
+//int sector = 0;
+int x_coordinate = 0;
+int y_coordinate = 0;
+
+int analogWriteVal = 255; // from 0-255
 
 MemoryModule MM;
 
@@ -53,7 +63,7 @@ void setup() {
   }
   pinMode(MemoryModuleSelect,INPUT);
   pinMode(SyllableSelect,INPUT);
-  pinMode(store_read,INPUT);
+  pinMode(write_read,INPUT);
   
   pinMode(ED_detect_Y,OUTPUT);
   pinMode(ED_detect_X,OUTPUT);
@@ -63,82 +73,17 @@ void setup() {
 }
 
 void loop() {
-  int ii = 0;
-
   //Functions only when the module is selected
-  //if (digitalRead(MemoryModuleSelect) == HIGH){
-    //Updates memory location
-    //Determine selected data locations
-    if (digitalRead(store_read) == HIGH){
-      syllable = 1;
-    }else{
-      syllable = 0;
-    }
-  
-    //Determines sector
-    int sector = 0;
-    ii = 0;
-    for(int i=4; i > 0; i--){
-      sector += sectorSelect[i] * pow(2,ii);
-      ii++;
-    }
-  
-    //Finds the xy coordinates
-    int Lo_Y_coord = 0;
-    ii = 0;
-    for(int i=2; i >= 0; i--){
-        Lo_Y_coord += Lo_X_answer[i] * pow(2,ii);
-        ii++;
-    }
-    Serial.print("Lo Y: ");Serial.print(Lo_Y_coord); Serial.print("   ");
-  
-    int Hi_Y_coord = 0;
-    ii = 0;
-    for(int i=2; i >= 0; i--){
-        Hi_Y_coord += Hi_Y_answer[i] * pow(2,ii);
-        ii++;
-    }
-    Serial.print("Hi Y: ");Serial.print(Hi_Y_coord); Serial.print("   ");
-  
-    int Lo_X_coord = 0;
-    ii = 0;
-    for(int i=2; i >= 0; i--){
-      Lo_X_coord += Lo_X_answer[i] * pow(2,ii);
-      ii++;
-    }
-    Serial.print("Lo X: ");Serial.print(Lo_X_coord); Serial.print("   ");
-  
-    int Hi_X_coord = 0;
-    ii = 0;
-    for(int i=3; i >= 0; i--){
-      Hi_X_coord += Hi_X_answer[i] * pow(2,ii);
-      ii++;
-    }
-    Serial.print("Hi X: ");Serial.print(Hi_X_coord); Serial.print("   ");Serial.println("");
-  
-    if ((Lo_Y_coord == Hi_Y_coord) && (Lo_X_coord == Hi_X_coord)){
-      location = (Hi_Y_coord * 10) + Hi_X_coord;
-      digitalWrite(dataSig,HIGH);
-      Serial.println("Coordinates found");
-    }else{
-      if (Lo_Y_coord != Hi_Y_coord){
-        pinMode(ED_detect_Y,HIGH);
-        Serial.println("ERROR: Y coordinates not found.");
-      }
-      if (Lo_X_coord != Hi_X_coord){
-        pinMode(ED_detect_X,HIGH);
-        Serial.println("ERROR: X coordinates not found.");
-      }
-    }
-    
-    if (digitalRead(store_read) == HIGH){         //Determines reading or writing, 0 = read, 1 = store
-      //readData(sector,location,syllable);
-    }else{
-      //storeData(sector,location,syllable);
-    }
-  //}
+  if (digitalRead(MemoryModuleSelect) == HIGH){
 
-  Serial.println("");
+    update_data_location();
+    
+    if (digitalRead(write_read) == HIGH){         //Determines reading or writing, 0 = read, 1 = write
+      readData(syllable, x_coordinate, y_coordinate);
+    }else{
+      writeData(syllable, x_coordinate, y_coordinate);
+    }
+  }
 }
 
 
@@ -146,40 +91,113 @@ void loop() {
 
 
 void initialize_memory(){
-  for(int i=0; i < 16; i++){
-    memory[i] = MM.location_empty;
+  for(int i=0; i < 64; i++){
+    for(int ii=0; i < 64; ii++){
+      memory[i][ii] = 0b00000000000000; //MM.location_empty;
+    }
   }
 }
 
-/*void storeData(int sec, int loc, int syl){
-  for(int i=0; i < 14; i++){
-    if(digitalRead(dataPin[i]) == HIGH){
-      bitWrite(memory[sec][loc[syl]],i,1);
-    }else{
-      bitWrite(memory[sec][loc[syl]],i,0);
+void update_data_location(){
+  int ii = 0;
+  
+  //Determines syllable
+  if (digitalRead(SyllableSelect) == HIGH){
+    syllable = 1;
+  }else{
+    syllable = 0;
+  }
+  
+  //Determines sector
+  /*sector = 0;
+  ii = 0;
+  for(int i=4; i > 0; i--){
+    sector += sectorSelect[i] * pow(2,ii);
+    ii++;
+  }*/
+
+  //Finds the xy coordinates
+  int Lo_Y_coord = 0;
+  for(int i=2; i >= 0; i--){
+      Lo_Y_coord += Lo_X_answer[i] * pow(2,ii);
+      ii++;
+  }
+  Serial.print("Lo Y: ");Serial.print(Lo_Y_coord); Serial.print("   ");
+
+  int Hi_Y_coord = 0;
+  ii = 0;
+  for(int i=2; i >= 0; i--){
+      Hi_Y_coord += Hi_Y_answer[i] * pow(2,ii);
+      ii++;
+  }
+  Serial.print("Hi Y: ");Serial.print(Hi_Y_coord); Serial.print("   ");
+
+  int Lo_X_coord = 0;
+  ii = 0;
+  for(int i=2; i >= 0; i--){
+    Lo_X_coord += Lo_X_answer[i] * pow(2,ii);
+    ii++;
+  }
+  Serial.print("Lo X: ");Serial.print(Lo_X_coord); Serial.print("   ");
+
+  int Hi_X_coord = 0;
+  ii = 0;
+  for(int i=3; i >= 0; i--){
+    Hi_X_coord += Hi_X_answer[i] * pow(2,ii);
+    ii++;
+  }
+  Serial.print("Hi X: ");Serial.print(Hi_X_coord); Serial.print("   ");Serial.println("");
+
+  if ((Lo_Y_coord == Hi_Y_coord) && (Lo_X_coord == Hi_X_coord)){
+    //location = (Hi_Y_coord * 10) + Hi_X_coord;
+    x_coordinate = 0;(Hi_X_coord * 10) + Lo_X_coord;
+    y_coordinate = 0;(Hi_Y_coord * 10) + Lo_Y_coord;
+    digitalWrite(dataSig,HIGH);
+    Serial.println("Coordinates found");
+  }else{
+    if (Lo_Y_coord != Hi_Y_coord){
+      pinMode(ED_detect_Y,HIGH);
+      Serial.println("ERROR: Y coordinates not found.");
+    }
+    if (Lo_X_coord != Hi_X_coord){
+      pinMode(ED_detect_X,HIGH);
+      Serial.println("ERROR: X coordinates not found.");
     }
   }
-}*/
+}
 
-/*void readData(int sec, int loc, int syl){
+//Stores data to memory
+void writeData(int syl, int xCoord, int yCoord){
   for(int i=0; i < 14; i++){
-    if(bitRead(memory[sec][loc][syl],i) == 1){
+    if(digitalRead(dataPin[i]) == HIGH){
+      bitWrite(memory[xCoord][yCoord],i,1);
+    }else{
+      bitWrite(memory[xCoord][yCoord],i,0);
+    }
+  }
+}
+
+//Writes aata to the board
+void readData(int syl, int xCoord, int yCoord){
+  for(int i=0; i < 14; i++){
+    if(bitRead(memory[xCoord][yCoord],i) == 1){
       digitalWrite(dataPin[i],HIGH);
     }else{
       digitalWrite(dataPin[i],LOW);
     }
   }
-}*/
-
-void printData(int sec, int loc, int syl){
-  Serial.print(memory[sec]);
 }
 
-void address_sweep(){
-  for(int i=0; i < 16; i++){
-    Serial.println("Sector " + String(i+1) + ":");
-    for(int ii=0; ii < 256; ii++){
-      //Serial.print(sector[i][ii][0],BIN); Serial.print("     "); Serial.print(sector[i][ii][1],BIN);
+void printData(int syl, int xCoord, int yCoord){
+  Serial.println(memory[xCoord][yCoord]);
+}
+
+void data_sweep(){
+  //Prints all data in the memory to serial port
+  Serial.println("Data in Memory:");
+  for(int i=0; i < 64; i++){
+    for(int ii=0; i < 64; ii++){
+      Serial.print(memory[i][ii]);Serial.print(", ");
     }
   }
 }
