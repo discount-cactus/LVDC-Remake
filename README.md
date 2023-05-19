@@ -24,4 +24,13 @@ The original LVDC ran the master clock at a speed of 2.048MHz to drive timing an
 The Memory Element is composed of the memory and circuitry that manages the memory structure itself and stores all data for the LVDC. The original memory element stored information in a 128x64x14 array of ferrite cores that were magnetized in a certain direction to store a 1 or 0. For this project, and due to the complexity of constructing such an array of tiny ferrite cores, an Arduino Mega Pro was used to emulate this array - which further led to several modifications to circuitry directly interacting with the would-be ferrite core array.
 
 ### Memory Control Element
-TBD
+
+<img width="630" alt="Screen Shot 2023-05-17 at 10 31 50 PM" src="https://github.com/discount-cactus/LVDC-Remake/assets/113632274/a84f87f9-5983-4bd9-80cd-7fd71a9e4cc3">
+
+The Memory Control Element acts as the bridge between the memory and the rest of the computer by taking in commands and other addressing signals to be sent to the memory element to read and write to/from the memory. During read instructions, the memory control element configures the memory element to be ready to be read from - and likewise during write instructions configures the memory element to be written to.
+
+### Data Control Element
+
+<img width="630" alt="Screen Shot 2023-05-17 at 10 32 07 PM" src="https://github.com/discount-cactus/LVDC-Remake/assets/113632274/049276af-e0a0-49b3-afaf-b548ef55cb36">
+
+The Data control Element provides the main register responsible for transferring data to locations all over the computer.
