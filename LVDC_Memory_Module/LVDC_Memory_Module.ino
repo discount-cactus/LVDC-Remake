@@ -1,6 +1,7 @@
 //LVDC Memory Module
 //Module to simulate a single memory module within the LVDC
 #include <LVDC.h>
+#include "Adafruit_FRAM_I2C.h"
 
 #define FRAM_A1 4
 #define FRAM_A2 5
@@ -33,10 +34,12 @@ int y_coordinate = 0;
 int analogWriteVal = 255; // from 0-255
 
 MemoryModule MM;
+Adafruit_FRAM_I2C FRAM = Adafruit_FRAM_I2C(); //MB85RC256V FRAM chip
 
 void setup() {
   Serial.begin(9600);
   while(!Serial){}
+  FRAM.begin();                               //Default address is 0x50
   
   initialize_memory();                        //Initializes the memory
   //initialize_memory_with_random_data();
@@ -211,5 +214,29 @@ void data_sweep(){
     for(int ii=0; i < 64; ii++){
       Serial.print(memory[i][ii]);Serial.print(", ");
     }
+  }
+}
+
+void FRAM_write(int address, int FRAMdata){
+  FRAM.write(address,FRAMdata);
+}
+
+uint8_t FRAM_read(int address){
+  uint8_t value = FRAM.read(address);
+  return value;
+}
+
+void FRAM_dump(){
+  // dump the entire 32K of memory!
+  uint8_t value;
+  for (uint16_t a=0; a < 32768; a++) {
+    value = FRAM.read(a);
+    if ((a % 32) == 0) {
+      Serial.print("\n 0x"); Serial.print(a, HEX); Serial.print(": ");
+    }
+    Serial.print("0x"); 
+    if (value < 0x1) 
+      Serial.print('0');
+    Serial.print(value, HEX); Serial.print(" ");
   }
 }
