@@ -25,12 +25,12 @@ The Memory Element is composed of the memory and circuitry that manages the memo
 
 ### Memory Control Element
 
-![Screen Shot 2023-05-30 at 2 07 12 PM](https://github.com/discount-cactus/LVDC-Remake/assets/113632274/01cea3fe-1cbf-4e57-9388-b17d89a9845f)
+![IMG_7375](https://github.com/discount-cactus/LVDC-Remake/assets/113632274/76904940-fd68-42c7-a28c-d6afd428e831)
 
 The Memory Control Element acts as the bridge between the memory and the rest of the computer by taking in commands and other addressing signals to be sent to the memory element to read and write to/from the memory. During read instructions, the memory control element configures the memory element to be ready to be read from - and likewise during write instructions configures the memory element to be written to.
 
 ### Data Control Element
 
-![Screen Shot 2023-05-30 at 2 07 52 PM](https://github.com/discount-cactus/LVDC-Remake/assets/113632274/74931774-cf16-485b-9dd7-c0a2d35adde5)
+![IMG_7374](https://github.com/discount-cactus/LVDC-Remake/assets/113632274/eb478e19-3e44-4d2a-b6b2-31c3ee7432b1)
 
 The Data control Element provides the main register responsible for transferring data to locations all over the computer.
