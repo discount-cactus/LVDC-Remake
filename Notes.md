@@ -1,6 +1,9 @@
 # Notes
 Collection of notes to save digitally on the repo.
 
+## Power
+- Master power was 28VAC, 3-phase 60Hz
+
 ## Boards
 #### Input Interface
 - Rev2
