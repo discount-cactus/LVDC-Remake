@@ -34,3 +34,9 @@ The Memory Control Element acts as the bridge between the memory and the rest of
 ![IMG_7374](https://github.com/discount-cactus/LVDC-Remake/assets/113632274/eb478e19-3e44-4d2a-b6b2-31c3ee7432b1)
 
 The Data control Element provides the main register responsible for transferring data to locations all over the computer.
+
+### Program Control Element
+
+<img width="832" alt="Screen Shot 2023-08-14 at 1 31 21 PM" src="https://github.com/discount-cactus/LVDC-Remake/assets/113632274/9fbe37ed-6592-4d57-b917-d3139101a5ca">
+
+The Program Control Element manages the starting and stopping of programs, conditioning memory address decoders to select instructions, selecting data and instruction memory sectors, selecting instruction addresses within memory sectors, storing and decoding op codes, interrupting programs to perform subroutines and generating HOP constants to resume programs. 
