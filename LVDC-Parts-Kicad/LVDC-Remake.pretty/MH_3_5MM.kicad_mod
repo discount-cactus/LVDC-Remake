@@ -1,7 +1,7 @@
 (footprint "MH_3_5MM" (version 20221018) (generator pcbnew)
   (layer "F.Cu")
   (attr through_hole board_only)
-  (fp_text reference "REF**" (at 0 -0.5 unlocked) (layer "F.SilkS") hide
+  (fp_text reference "REF**" (at 0 -0.5 unlocked) (layer "F.SilkS")
       (effects (font (size 1 1) (thickness 0.1)))
     (tstamp 69ae2c64-d945-45b9-b444-41e322495403)
   )
