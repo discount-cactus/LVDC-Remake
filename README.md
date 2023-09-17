@@ -37,6 +37,12 @@ The Data control Element provides the main register responsible for transferring
 
 ### Program Control Element
 
-<img width="832" alt="Screen Shot 2023-08-14 at 1 31 21 PM" src="https://github.com/discount-cactus/LVDC-Remake/assets/113632274/9fbe37ed-6592-4d57-b917-d3139101a5ca">
+![IMG_8091](https://github.com/discount-cactus/LVDC-Remake/assets/113632274/33f172e7-dc60-4729-8b49-1f67608c539a)
 
 The Program Control Element manages the starting and stopping of programs, conditioning memory address decoders to select instructions, selecting data and instruction memory sectors, selecting instruction addresses within memory sectors, storing and decoding op codes, interrupting programs to perform subroutines and generating HOP constants to resume programs. 
+
+### Arithmetic Element / Multiply-Divide Element
+
+<img width="996" alt="Screen Shot 2023-09-09 at 9 31 28 PM" src="https://github.com/discount-cactus/LVDC-Remake/assets/113632274/fa477eb1-01d6-4430-9fae-bf5c84dfa0b2">
+
+The Arithmetic Element and the Multiply-Divide Element were combined into the same board given their similar functions. Together, they handle all mathematical computations on the computer. The arithmetic handles all addition and subtraction and similar operations while the multiply-divide element, given their complexity, are dedicated strictly to binary multiplication and division.
