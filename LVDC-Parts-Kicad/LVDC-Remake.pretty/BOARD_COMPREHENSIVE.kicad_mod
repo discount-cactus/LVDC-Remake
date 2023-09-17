@@ -131,4 +131,9 @@
     (scale (xyz 1 1 1))
     (rotate (xyz 0 0 0))
   )
+  (model "/Users/brandonlantau/Documents/KiCad/7.0/3dmodels/BOARD_ARITHMETIC_MULTIPLYDIVIDE_ELEMENT.step"
+    (offset (xyz -210 87.4 25.5))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 0))
+  )
 )

@@ -43,4 +43,9 @@
     (scale (xyz 1 1 1))
     (rotate (xyz -90 0 0))
   )
+  (model "/Users/brandonlantau/Documents/KiCad/7.0/3dmodels/Fuse_15A.step" hide
+    (offset (xyz 0 0 16.764))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 90 180 90))
+  )
 )
