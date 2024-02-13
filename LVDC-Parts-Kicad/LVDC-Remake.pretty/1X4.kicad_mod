@@ -78,7 +78,7 @@
       (effects (font (size 1.1684 1.1684) (thickness 0.1016)) (justify left bottom))
     (tstamp 9a8c9fab-ad29-4860-a818-abc5b7883cfc)
   )
-  (fp_text user "Label" (at 1.269999 2.287153) (layer "F.SilkS")
+  (fp_text user "Label" (at 1.269999 2.287153) (layer "F.SilkS") hide
       (effects (font (face "Futura") (size 1.016 1.016) (thickness 0.127)))
     (tstamp 51ee06ef-73c9-426b-b8f3-6bf009a18605)
     (render_cache "Label" 0

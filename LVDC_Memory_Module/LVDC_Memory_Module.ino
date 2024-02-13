@@ -95,7 +95,7 @@ void initialize_memory(){
   }
 }
 
-void initialize_memory_with_random_data(){
+/*void initialize_memory_with_random_data(){
   int num;
   for(int i=0; i < 64; i++){
     for(int ii=0; i < 64; ii++){
@@ -111,7 +111,7 @@ void initialize_memory_with_random_data(){
       memory[i][ii] = tempData;
     }
   }
-}
+}*/
 
 void update_data_location(){
   int ii = 0;
@@ -192,7 +192,7 @@ void writeData(int syl, int xCoord, int yCoord){
   }
 }
 
-//Writes aata to the board
+//Writes data to the board
 void readData(int syl, int xCoord, int yCoord){
   for(int i=0; i < 14; i++){
     if(bitRead(memory[xCoord][yCoord],i) == 1){
